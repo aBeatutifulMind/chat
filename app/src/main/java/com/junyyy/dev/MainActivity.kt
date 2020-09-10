@@ -47,5 +47,22 @@ class MainActivity : AppCompatActivity() {
 
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        binding.lifecycleOwner = this
+
+        val viewModel = ViewModelProvider(this).get(ChannelListViewModel::class.java)
+
+        binding.viewModel = viewModel
+        binding.channelList.setViewModel(viewModel, this)
+
+        val filter = and(eq("type", "messaging"), `in`("members", listOf(user.id)))
+        viewModel.setChannelFilter(filter)
+
+        binding.channelList.setOnChannelClickListener { channel ->
+            // open the channel activity
+        }
+        binding.channelList.setOnUserClickListener { user ->
+            // open your user profile
+        }
     }
 }
