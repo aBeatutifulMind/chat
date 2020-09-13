@@ -59,10 +59,11 @@ class MainActivity : AppCompatActivity() {
         viewModel.setChannelFilter(filter)
 
         binding.channelList.setOnChannelClickListener { channel ->
-            // open the channel activity
+            val intent = ChannelActivity.newIntent(this, channel)
+            startActivity(intent)
         }
         binding.channelList.setOnUserClickListener { user ->
-            // open your user profile
+
         }
     }
 }
